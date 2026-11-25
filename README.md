@@ -77,7 +77,6 @@ mvn exec:java -Dexec.mainClass=br.mackenzie.biblioteca.client.ClienteBiblioteca
 4. Registro de 5 empréstimos (Client streaming)
 5. Chat com 4 mensagens (Bidirecional)
 6. Cadastro com ISBN duplicado → `ALREADY_EXISTS`
-7. Extras: `INVALID_ARGUMENT` (título vazio) e `UNAUTHENTICATED` (sem token)
 
 
 ## Prints da execução
