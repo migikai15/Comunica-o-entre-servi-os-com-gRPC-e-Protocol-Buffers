@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package biblioteca;
+
+option java_multiple_files = true;
+option java_package = "br.mackenzie.biblioteca.grpc";
+option java_outer_classname = "BibliotecaProto";
+
+// Serviço central da Biblioteca Digital.
+service BibliotecaService {
+  // 1) Unary: cadastra um livro no acervo.
+  rpc cadastrarLivro(Livro) returns (CadastroResponse);
+
+  // 2) Server streaming: devolve, um a um, os livros de um autor.
+  rpc listarLivrosPorAutor(AutorRequest) returns (stream Livro);
+
+  // 3) Client streaming: recebe vários empréstimos e devolve um resumo.
+  rpc registrarEmprestimos(stream Emprestimo) returns (ResumoEmprestimos);
+
+  // 4) Bidirecional: chat com o bibliotecário virtual.
+  rpc chatBibliotecario(stream MensagemUsuario) returns (stream SugestaoLivro);
+}
+
+message Livro {
+  int64  id     = 1;  // preenchido pelo servidor
+  string titulo = 2;
+  string autor  = 3;
+  int32  ano    = 4;
+  string isbn   = 5;
+}
+
+message CadastroResponse {
+  int64  id       = 1;
+  string status   = 2;  // ex.: "CADASTRADO"
+  string mensagem = 3;
+}
+
+message AutorRequest {
+  string autor = 1;
+}
+
+message Emprestimo {
+  string usuario  = 1;
+  int64  livro_id = 2;
+}
+
+message ResumoEmprestimos {
+  int32 total_registrados = 1;
+  int32 total_rejeitados  = 2;
+  int64 tempo_total_ms    = 3;
+}
+
+message MensagemUsuario {
+  string usuario = 1;
+  string texto   = 2;
+}
+
+message SugestaoLivro {
+  string palavra_chave = 1;
+  string titulo        = 2;
+  string autor         = 3;
+  string mensagem      = 4;
+}
