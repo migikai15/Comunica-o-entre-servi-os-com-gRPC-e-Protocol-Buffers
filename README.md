@@ -1,4 +1,4 @@
-# Biblioteca Digital — gRPC com Java
+# Comunicação entre serviços com gRPC e Protocol Buffers
 
 **Disciplina:** Computação Distribuída — Universidade Presbiteriana Mackenzie
 **Aluno:** Gabriel Tortolio Fonseca — **RA:** 10416751
